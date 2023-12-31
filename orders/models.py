@@ -12,13 +12,12 @@ class Order(models.Model):
     ORDER_PROCESSED=2
     ORDER_DELIVERED=3
     ORDER_REJECTED=4
-    STATUS_CHOICES=( ((ORDER_CONFIRMED,"ORDER_CONFIRMED"),
-                      (ORDER_PROCESSED,"ORDER_PROCESSED"),
-                      (ORDER_DELIVERED,"ORDER_DELIVERED")),)
-    order_status= models.IntegerField(choices=STATUS_CHOICES,default=CART_STAGE)
-
-
-
+    STATUS_CHOICE = (
+                    (ORDER_CONFIRMED, "ORDER_CONFIRMED"),
+                    (ORDER_PROCESSED, "ORDER_PROCESSED"),
+                    (ORDER_DELIVERED, "ORDER_DELIVERED"),
+                    )
+    order_status= models.IntegerField(choices=STATUS_CHOICE,default=CART_STAGE)
 
     # a single customer can have multiple orders (for example, if they start a new order after completing an old one without checking out).
     owner=models.ForeignKey(Customer,on_delete=models.SET_NULL,related_name='orders',null=True)
