@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class Customer(models.Model):
     LIVE=1
     DELETE=0
-    DELETE_CHOICES=((LIVE,'Live'),DELETE('Delete'))
+    DELETE_CHOICES=((LIVE,'Live'),(DELETE,'Delete'))
     name=models.CharField(max_length=100, null=False)
     address=models.TextField()
     user= models.OneToOneField(User,on_delete=models.CASCADE,related_name='customer_profile')

@@ -6,7 +6,7 @@ from products.models import Product
 class Order(models.Model):
     LIVE=1
     DELETE=0
-    DELETE_CHOICES=((LIVE,'Live'),DELETE('Delete'))
+    DELETE_CHOICES=((LIVE,'Live'),(DELETE,'Delete'))
     CART_STAGE=0
     ORDER_CONFIRMED=1
     ORDER_PROCESSED=2
@@ -21,7 +21,7 @@ class Order(models.Model):
 
 
     # a single customer can have multiple orders (for example, if they start a new order after completing an old one without checking out).
-    owner=models.ForeignKey(Customer,on_delete=models.SET_NULL,related_name='orders')
+    owner=models.ForeignKey(Customer,on_delete=models.SET_NULL,related_name='orders',null=True)
     delete_status=models.IntegerField(choices=DELETE_CHOICES,default=LIVE)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
@@ -30,9 +30,9 @@ class Order(models.Model):
 class OrderedItem(models.Model):
     LIVE=1
     DELETE=0
-    DELETE_CHOICES=((LIVE,'Live'),DELETE('Delete'))
+    DELETE_CHOICES=((LIVE,'Live'),(DELETE,'Delete'))
     #a single Product may be present as many OrderedItems (ie; an order can have multiple copies of same product as OrderedItem)
-    product = models.ForeignKey(Product,on_delete=models.SET_NULL,related_name='added_carts')
+    product = models.ForeignKey(Product,on_delete=models.SET_NULL,related_name='added_carts',null=True)
     quantity = models.IntegerField(default=1)
     #a single order contains multiple orderedItems
     owner = models.ForeignKey(Order,on_delete=models.CASCADE,related_name='added_items')
