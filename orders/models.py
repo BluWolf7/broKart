@@ -13,9 +13,9 @@ class Order(models.Model):
     ORDER_DELIVERED=3
     ORDER_REJECTED=4
     STATUS_CHOICE = (
-                    (ORDER_CONFIRMED, "ORDER_CONFIRMED"),
                     (ORDER_PROCESSED, "ORDER_PROCESSED"),
                     (ORDER_DELIVERED, "ORDER_DELIVERED"),
+                    (ORDER_REJECTED,"ORDER_REJECTED")                    
                     )
     order_status= models.IntegerField(choices=STATUS_CHOICE,default=CART_STAGE)
 
