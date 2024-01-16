@@ -21,7 +21,15 @@
 
     }
 </script>
-{% endblock extra_scripts %}
-
+{% if register %}
+    <script>
+        register()
+    </script>
+    {% else %}
+    <script>
+        login()
+    </script>
+    {%endif%}
+    {% endblock extra_scripts %}
 {% block content %}
 {% endblock content %}
